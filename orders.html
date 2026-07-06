@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>My Orders</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f8f4ef;
+}
+
+.navbar{
+    background:burlywood;
+}
+
+.card img{
+    width:90px;
+    height:100px;
+    object-fit:cover;
+}
+@media (max-width:768px){
+
+.title{
+    font-size:32px;
+}
+
+.hero h1{
+    font-size:40px;
+}
+
+.product-img{
+    height:400px;
+}
+
+.card img{
+    height:300px;
+}
+
+.profile-card{
+    padding:20px;
+}
+
+.stats{
+    flex-direction:column;
+}
+
+.navbar-brand{
+    font-size:1.6rem;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="container">
+
+<a class="navbar-brand text-white fw-bold"
+href="index.html">
+
+VISH
+
+</a>
+
+</div>
+
+</nav>
+
+<div class="container my-5">
+
+<h2 class="mb-4">
+
+My Orders
+
+</h2>
+
+<div id="orders"></div>
+
+</div>
+
+<script>
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+const orders=JSON.parse(localStorage.getItem(`orders_${currentUser.id}`)) || [];
+
+let html="";
+
+if(orders.length==0){
+
+html=`
+
+<div class="alert alert-warning">
+
+No Orders Yet
+
+</div>
+
+`;
+
+}
+
+orders.forEach((order,index)=>{
+
+html+=`
+
+<div class="card shadow mb-4">
+
+<div class="card-body">
+
+<h4>
+
+Order #${index+1}
+
+</h4>
+
+<p>
+
+<b>Date :</b>
+
+${order.date}
+
+</p>
+
+<p>
+
+<b>Payment :</b>
+
+${order.payment}
+
+</p>
+
+<p>
+
+<b>Total :</b>
+
+₹${order.total}
+
+</p>
+
+<p>
+
+<b>Status :</b>
+
+<span class="badge bg-success">
+
+Delivered
+
+</span>
+
+</p>
+
+<button
+class="btn btn-dark"
+onclick="window.location.href='orderDetails.html?index=${index}'">
+
+View Details
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("orders").innerHTML=html;
+
+</script>
+
+</body>
+
+</html>

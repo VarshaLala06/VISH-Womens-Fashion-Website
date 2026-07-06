@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VISH Products</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f8f4ef;
+}
+
+.navbar{
+    background:burlywood;
+}
+
+.navbar-brand{
+    font-size:2rem;
+    font-weight:bold;
+    color:white!important;
+    letter-spacing:5px;
+}
+
+.title{
+    text-align:center;
+    margin:40px 0;
+    font-size:45px;
+    color:#c58a28;
+    font-weight:bold;
+}
+
+.filter-box{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.card{
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card img{
+    height:350px;
+    object-fit:cover;
+}
+
+.price{
+    color:#b8860b;
+    font-size:24px;
+    font-weight:bold;
+}
+.dropdown-menu{
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 0;
+    box-shadow: 0 12px 30px rgba(0,0,0,.15);
+    overflow: hidden;
+}
+.dropdown-item{
+    background: white;
+    color: #444;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 22px;
+    transition: all .3s ease;
+}
+.dropdown-item:hover{
+    background: burlywood !important;
+    color: white !important;
+    padding-left: 30px;
+}
+.dropdown-divider{
+    margin: 6px 0;
+}
+.product-card{
+    cursor:pointer;
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.18);
+}
+
+.product-card img{
+    height:350px;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.product-card:hover img{
+    transform:scale(1.05);
+}
+
+.product-name{
+    color:#333;
+    transition:.3s;
+}
+
+
+
+.card-body{
+    padding:22px;
+}
+
+.price{
+    color:#b8860b;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.btn{
+    border-radius:8px;
+}
+
+.btn-dark:hover{
+    font-size: large;
+}
+
+@media (max-width:768px){
+
+.title{
+    font-size:32px;
+}
+
+.hero h1{
+    font-size:40px;
+}
+
+.product-img{
+    height:400px;
+}
+
+.card img{
+    height:300px;
+}
+
+.profile-card{
+    padding:20px;
+}
+
+.stats{
+    flex-direction:column;
+}
+
+.navbar-brand{
+    font-size:1.6rem;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg py-3">
+
+<div class="container">
+
+<a class="navbar-brand text-white fw-bold" href="index.html">
+VISH
+</a>
+
+<button
+class="navbar-toggler bg-light"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarNav">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarNav">
+
+<ul class="navbar-nav mx-auto" style="font-size:1.12rem;">
+
+<li class="nav-item dropdown">
+
+<a
+class="nav-link dropdown-toggle text-white px-4"
+href="#"
+id="categoryDropdown"
+role="button"
+data-bs-toggle="dropdown">
+
+Categories
+
+</a>
+
+<ul class="dropdown-menu">
+
+<li><a class="dropdown-item" href="products.html?category=Dresses">Dresses</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Tops">Tops</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=T-Shirts">T-Shirts</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Shirts">Shirts</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Jeans">Jeans</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Skirts">Skirts</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Sarees">Sarees</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Lehengas">Lehengas</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Kurtas">Kurtas</a></li>
+
+<li><a class="dropdown-item" href="products.html?category=Gowns">Gowns</a></li>
+
+</ul>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link text-white px-4" href="index.html#collections">
+Collections
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link text-white px-4" href="newarrivals.html">
+New Arrivals
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link text-white px-4" href="wishlist.html">
+Wishlist
+</a>
+
+</li>
+
+</ul>
+
+<div class="d-flex align-items-center gap-3">
+
+
+<button
+class="btn text-white"
+onclick="goWishlist()">
+Wishlist
+</button>
+
+<button
+class="btn text-white"
+onclick="goCart()">
+Cart
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<h1 id="Title" class="title"></h1>
+
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-3">
+
+<div class="filter-box">
+
+<h4>Search</h4>
+
+<input
+type="text"
+id="search"
+class="form-control mb-4"
+placeholder="Search Products..."
+onkeyup="searchProducts()">
+
+<h4>Sort</h4>
+
+<select
+class="form-select"
+id="sort"
+onchange="sortProducts()">
+
+<option value="">Default</option>
+
+<option value="low">
+Price : Low to High
+</option>
+
+<option value="high">
+Price : High to Low
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-9">
+
+<div class="row" id="products">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="js/productsData.js"></script>
+
+<script>
+
+let currentProducts=[];
+
+
+
+function categories(){
+
+const params=new URLSearchParams(window.location.search);
+
+const id=params.get("id");
+
+const category=params.get("category");
+
+const title=document.getElementById("Title");
+
+
+if(category){
+
+title.innerHTML=category;
+
+currentProducts=allproducts.filter(product=>
+
+product.category.toLowerCase()==category.toLowerCase()
+
+);
+
+display(currentProducts);
+
+return;
+
+}
+
+
+const collections=[
+
+"Cafe Aesthetics",
+
+"Wedding Elegance",
+
+"Everyday Casuals",
+
+"Wander Collection",
+
+"Office Essentials",
+
+"Beach Escape",
+
+"Urban Street Style",
+
+"Party Glam",
+
+"Active Motion"
+
+];
+
+
+const collection=collections[id-1];
+
+title.innerHTML=collection;
+
+currentProducts=allproducts.filter(product=>
+
+product.collection==collection
+
+);
+
+display(currentProducts);
+
+}
+
+
+function display(products){
+
+let data="";
+
+products.forEach(product=>{
+
+data+=`
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<div
+class="card shadow h-100 product-card"
+onclick="viewProduct(${product.id})">
+
+<img
+src="${product.image}"
+class="card-img-top">
+
+<div class="card-body d-flex flex-column">
+
+<h5 class="fw-bold product-name">
+
+${product.name}
+
+</h5>
+
+<p class="text-muted mb-1">
+
+${product.category}
+
+</p>
+
+<div class="price mb-2">
+
+₹${product.price}
+
+</div>
+
+<p class="text-secondary">
+
+${product.description}
+
+</p>
+
+<div class="mt-auto d-grid gap-2">
+
+<button
+class="btn btn-dark"
+onclick="event.stopPropagation();addToCart(${product.id})">
+
+Add To Cart
+
+</button>
+
+<button
+class="btn btn-outline-danger"
+onclick="event.stopPropagation();addWishlist(${product.id})">
+
+❤ Wishlist
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("products").innerHTML=data;
+
+}
+
+
+function searchProducts(){
+
+const value=document.getElementById("search").value.toLowerCase();
+
+const filtered=currentProducts.filter(product=>
+
+product.name.toLowerCase().includes(value)
+
+);
+
+display(filtered);
+
+}
+
+function viewProduct(id){
+
+    window.location.href = `productDetails.html?id=${id}`;
+
+}
+
+function sortProducts(){
+
+const value=document.getElementById("sort").value;
+
+let arr=[...currentProducts];
+
+if(value=="low"){
+
+arr.sort((a,b)=>a.price-b.price);
+
+}
+
+else if(value=="high"){
+
+arr.sort((a,b)=>b.price-a.price);
+
+}
+
+display(arr);
+
+}
+
+function viewProduct(id){
+    window.location.href = `productDetails.html?id=${id}`;
+}
+
+function updateCounts(){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser) return;
+
+const cart=JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+
+const wishlist=JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+
+document.getElementById("cartCount").innerHTML=cart.length;
+
+document.getElementById("wishlistCount").innerHTML=wishlist.length;
+
+}
+
+function goCart(){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+
+alert("Please Login");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+window.location.href="cart.html";
+
+}
+
+function goWishlist(){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+
+alert("Please Login");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+window.location.href="wishlist.html";
+
+}
+
+function addToCart(id){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+
+alert("Please Login First");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+const product=allproducts.find(p=>p.id===id);
+
+let cart=JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+
+const existing=cart.find(item=>item.id===id);
+
+if(existing){
+
+existing.quantity++;
+
+}
+else{
+
+cart.push({
+...product,
+quantity:1
+});
+
+}
+
+localStorage.setItem(`cart_${currentUser.id}`,JSON.stringify(cart));
+
+updateCounts();
+
+alert("Product Added To Cart");
+
+}
+
+
+function addWishlist(id){
+
+const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+
+alert("Please Login First");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+let wishlist=JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+
+const exists=wishlist.find(item=>item.id===id);
+
+if(exists){
+
+alert("Already in Wishlist");
+
+return;
+
+}
+
+const product=allproducts.find(p=>p.id===id);
+
+wishlist.push(product);
+
+localStorage.setItem(`wishlist_${currentUser.id}`,JSON.stringify(wishlist));
+
+alert("Added To Wishlist");
+
+}
+
+
+
+categories();
+updateCounts();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
