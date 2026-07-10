@@ -179,6 +179,12 @@ c.type="password";
 
 
 function registerUser(){
+const nameRegex = /^[A-Za-z ]{3,30}$/;
+
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+const passwordRegex =
+/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const name=document.getElementById("name").value.trim();
 
@@ -191,18 +197,48 @@ const confirm=document.getElementById("confirm").value;
 
 if(name==""||email==""||password==""||confirm==""){
 
-alert("Fill all fields");
+    alert("Fill all fields");
 
-return;
+    return;
 
 }
 
+if(!nameRegex.test(name)){
+
+    alert("Name should contain only letters and be at least 3 characters.");
+
+    return;
+
+}
+
+if(!emailRegex.test(email)){
+
+    alert("Enter a valid email address.");
+
+    return;
+
+}
+
+if(!passwordRegex.test(password)){
+
+    alert(
+        "Password must contain:\n\n" +
+        "• Minimum 8 characters\n" +
+        "• One uppercase letter\n" +
+        "• One lowercase letter\n" +
+        "• One number\n" +
+        "• One special character"
+    );
+
+    return;
+
+}
 
 if(password!=confirm){
 
-alert("Passwords do not match");
+    alert("Passwords do not match");
 
-return;
+    return;
 
 }
 

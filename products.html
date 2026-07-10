@@ -464,13 +464,29 @@ Add To Cart
 
 </button>
 
-<button
-class="btn btn-outline-danger"
-onclick="event.stopPropagation();addWishlist(${product.id})">
+${
+isInWishlist(product.id)
 
-❤ Wishlist
+?
 
-</button>
+`<button
+class="btn btn-success w-100"
+disabled>
+
+✔ Already in Wishlist
+
+</button>`
+
+:
+
+`<button
+class="btn btn-outline-danger w-100"
+onclick="addWishlist(${product.id})">
+
+❤ Add To Wishlist
+
+</button>`
+}
 
 </div>
 
@@ -569,6 +585,20 @@ window.location.href="cart.html";
 
 }
 
+function isInWishlist(id){
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!currentUser) return false;
+
+    const wishlist = JSON.parse(
+        localStorage.getItem(`wishlist_${currentUser.id}`)
+    ) || [];
+
+    return wishlist.some(item => item.id === id);
+
+}
+
 function goWishlist(){
 
 const currentUser=JSON.parse(localStorage.getItem("currentUser"));
@@ -663,6 +693,8 @@ wishlist.push(product);
 localStorage.setItem(`wishlist_${currentUser.id}`,JSON.stringify(wishlist));
 
 alert("Added To Wishlist");
+
+displayProducts();    
 
 }
 
