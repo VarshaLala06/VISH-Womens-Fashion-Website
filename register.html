@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,7 +27,8 @@ body{
 }
 
 .register-box{
-    width:450px;
+    max-width:450px;
+    width:90%;
     margin:70px auto;
     background:white;
     padding:35px;
@@ -40,9 +42,15 @@ h2{
     color:#b8860b;
 }
 
+.invalid-feedback{
+    display:block;
+    font-size:14px;
+}
+
 </style>
 
 </head>
+
 <body>
 
 <nav class="navbar navbar-expand-lg">
@@ -50,13 +58,14 @@ h2{
 <div class="container">
 
 <a href="index.html" class="navbar-brand">
+
 VISH
+
 </a>
 
 </div>
 
 </nav>
-
 
 <div class="register-box">
 
@@ -64,67 +73,81 @@ VISH
 
 <div class="mb-3">
 
-<label>Name</label>
+<label class="form-label">Name</label>
 
 <input
 type="text"
 id="name"
-class="form-control">
+class="form-control"
+placeholder="Enter your name"
+oninput="validateName()">
+
+<div id="nameError" class="invalid-feedback"></div>
 
 </div>
 
-
 <div class="mb-3">
 
-<label>Email</label>
+<label class="form-label">Email</label>
 
 <input
 type="email"
 id="email"
-class="form-control">
+class="form-control"
+placeholder="Enter your email"
+oninput="validateEmail()">
+
+<div id="emailError" class="invalid-feedback"></div>
 
 </div>
 
-
 <div class="mb-3">
 
-<label>Password</label>
+<label class="form-label">Password</label>
 
 <input
 type="password"
 id="password"
-class="form-control">
+class="form-control"
+placeholder="Enter password"
+oninput="validatePassword()">
+
+<div id="passwordError" class="invalid-feedback"></div>
 
 </div>
 
-
 <div class="mb-3">
 
-<label>Confirm Password</label>
+<label class="form-label">Confirm Password</label>
 
 <input
 type="password"
 id="confirm"
-class="form-control">
+class="form-control"
+placeholder="Confirm password"
+oninput="validateConfirm()">
+
+<div id="confirmError" class="invalid-feedback"></div>
 
 </div>
-
 
 <div class="form-check mb-3">
 
 <input
 class="form-check-input"
 type="checkbox"
+id="showPassword"
 onclick="togglePassword()">
 
-<label class="form-check-label">
+<label
+class="form-check-label"
+for="showPassword">
 
 Show Password
 
 </label>
 
 </div>
-
 
 <button
 class="btn btn-dark w-100"
@@ -133,7 +156,6 @@ onclick="registerUser()">
 Register
 
 </button>
-
 
 <p class="text-center mt-3">
 
@@ -149,138 +171,205 @@ Login
 
 </div>
 
-
+<!-- JavaScript goes here -->
 <script>
+    function togglePassword(){
 
-function togglePassword(){
+    const password=document.getElementById("password");
+    const confirm=document.getElementById("confirm");
 
-const p=document.getElementById("password");
+    if(password.type==="password"){
 
-const c=document.getElementById("confirm");
+        password.type="text";
+        confirm.type="text";
 
-if(p.type=="password"){
+    }
+    else{
 
-p.type="text";
+        password.type="password";
+        confirm.type="password";
 
-c.type="text";
-
-}
-
-else{
-
-p.type="password";
-
-c.type="password";
+    }
 
 }
 
+// ---------------- Name Validation ----------------
+
+function validateName(){
+
+    const name=document.getElementById("name");
+    const error=document.getElementById("nameError");
+
+    const regex=/^[A-Za-z ]{3,30}$/;
+
+    if(name.value.trim()==""){
+
+        name.classList.add("is-invalid");
+        error.innerHTML="Name is required.";
+        return false;
+
+    }
+
+    if(!regex.test(name.value.trim())){
+
+        name.classList.add("is-invalid");
+        error.innerHTML="Enter a valid name.";
+        return false;
+
+    }
+
+    name.classList.remove("is-invalid");
+    error.innerHTML="";
+    return true;
+
 }
 
+// ---------------- Email Validation ----------------
 
+function validateEmail(){
+
+    const email=document.getElementById("email");
+    const error=document.getElementById("emailError");
+
+    const regex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    if(email.value.trim()==""){
+
+        email.classList.add("is-invalid");
+        error.innerHTML="Email is required.";
+        return false;
+
+    }
+
+    if(!regex.test(email.value.trim())){
+
+        email.classList.add("is-invalid");
+        error.innerHTML="Enter a valid email address.";
+        return false;
+
+    }
+
+    email.classList.remove("is-invalid");
+    error.innerHTML="";
+    return true;
+
+}
+
+// ---------------- Password Validation ----------------
+
+function validatePassword(){
+
+    const password=document.getElementById("password");
+    const error=document.getElementById("passwordError");
+
+    const regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if(password.value==""){
+
+        password.classList.add("is-invalid");
+        error.innerHTML="Password is required.";
+        return false;
+
+    }
+
+    if(!regex.test(password.value)){
+
+        password.classList.add("is-invalid");
+        error.innerHTML="Minimum 8 characters with uppercase, lowercase, number and special character.";
+        return false;
+
+    }
+
+    password.classList.remove("is-invalid");
+    error.innerHTML="";
+
+    validateConfirm();
+
+    return true;
+
+}
+
+// ---------------- Confirm Password ----------------
+
+function validateConfirm(){
+
+    const password=document.getElementById("password");
+    const confirm=document.getElementById("confirm");
+    const error=document.getElementById("confirmError");
+
+    if(confirm.value==""){
+
+        confirm.classList.add("is-invalid");
+        error.innerHTML="Confirm your password.";
+        return false;
+
+    }
+
+    if(password.value!==confirm.value){
+
+        confirm.classList.add("is-invalid");
+        error.innerHTML="Passwords do not match.";
+        return false;
+
+    }
+
+    confirm.classList.remove("is-invalid");
+    error.innerHTML="";
+    return true;
+
+}
+
+// ---------------- Register ----------------
 
 function registerUser(){
-const nameRegex = /^[A-Za-z ]{3,30}$/;
 
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+    const validName=validateName();
+    const validEmail=validateEmail();
+    const validPassword=validatePassword();
+    const validConfirm=validateConfirm();
 
-const passwordRegex =
-/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if(!(validName && validEmail && validPassword && validConfirm)){
 
-const name=document.getElementById("name").value.trim();
+        return;
 
-const email=document.getElementById("email").value.trim();
+    }
 
-const password=document.getElementById("password").value;
+    const name=document.getElementById("name").value.trim();
+    const email=document.getElementById("email").value.trim();
+    const password=document.getElementById("password").value;
 
-const confirm=document.getElementById("confirm").value;
+    let users=JSON.parse(localStorage.getItem("users")) || [];
 
+    const exists=users.find(user=>user.email===email);
 
-if(name==""||email==""||password==""||confirm==""){
+    if(exists){
 
-    alert("Fill all fields");
+        document.getElementById("email").classList.add("is-invalid");
+        document.getElementById("emailError").innerHTML="Email already registered.";
+        return;
 
-    return;
+    }
 
-}
+    const user={
 
-if(!nameRegex.test(name)){
+        id:Date.now(),
+        name:name,
+        email:email,
+        password:password
 
-    alert("Name should contain only letters and be at least 3 characters.");
+    };
 
-    return;
+    users.push(user);
 
-}
+    localStorage.setItem("users",JSON.stringify(users));
 
-if(!emailRegex.test(email)){
+    alert("Registration Successful!");
 
-    alert("Enter a valid email address.");
-
-    return;
-
-}
-
-if(!passwordRegex.test(password)){
-
-    alert(
-        "Password must contain:\n\n" +
-        "• Minimum 8 characters\n" +
-        "• One uppercase letter\n" +
-        "• One lowercase letter\n" +
-        "• One number\n" +
-        "• One special character"
-    );
-
-    return;
-
-}
-
-if(password!=confirm){
-
-    alert("Passwords do not match");
-
-    return;
-
-}
-
-
-let users=JSON.parse(localStorage.getItem("users")) || [];
-
-
-const exists=users.find(user=>user.email===email);
-
-if(exists){
-
-alert("Email already registered");
-
-return;
-
-}
-
-
-const user={
-
-id:Date.now(),
-
-name:name,
-
-email:email,
-
-password:password
-
-};
-
-
-users.push(user);
-
-localStorage.setItem("users",JSON.stringify(users));
-
-alert("Registration Successful");
-
-window.location.href="login.html";
+    window.location.href="login.html";
 
 }
 
 </script>
-
 </body>
+
 </html>

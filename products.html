@@ -409,7 +409,6 @@ display(currentProducts);
 
 }
 
-
 function display(products){
 
 let data="";
@@ -456,13 +455,29 @@ ${product.description}
 
 <div class="mt-auto d-grid gap-2">
 
-<button
-class="btn btn-dark"
+${
+isInCart(product.id)
+
+?
+
+`<button
+class="btn btn-success w-100"
+disabled>
+
+✔ Added To Cart
+
+</button>`
+
+:
+
+`<button
+class="btn btn-dark w-100"
 onclick="event.stopPropagation();addToCart(${product.id})">
 
 Add To Cart
 
-</button>
+</button>`
+}
 
 ${
 isInWishlist(product.id)
@@ -473,7 +488,7 @@ isInWishlist(product.id)
 class="btn btn-success w-100"
 disabled>
 
-✔ Already in Wishlist
+❤ Added To Wishlist
 
 </button>`
 
@@ -481,7 +496,7 @@ disabled>
 
 `<button
 class="btn btn-outline-danger w-100"
-onclick="addWishlist(${product.id})">
+onclick="event.stopPropagation();addWishlist(${product.id})">
 
 ❤ Add To Wishlist
 
@@ -503,7 +518,6 @@ onclick="addWishlist(${product.id})">
 document.getElementById("products").innerHTML=data;
 
 }
-
 
 function searchProducts(){
 
@@ -547,9 +561,6 @@ display(arr);
 
 }
 
-function viewProduct(id){
-    window.location.href = `productDetails.html?id=${id}`;
-}
 
 function updateCounts(){
 
@@ -587,17 +598,28 @@ window.location.href="cart.html";
 
 function isInWishlist(id){
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if(!currentUser) return false;
+if(!currentUser) return false;
 
-    const wishlist = JSON.parse(
-        localStorage.getItem(`wishlist_${currentUser.id}`)
-    ) || [];
+let wishlist = JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
 
-    return wishlist.some(item => item.id === id);
+return wishlist.some(item => item.id === id);
 
 }
+
+function isInCart(id){
+
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser) return false;
+
+let cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+
+return cart.some(item => item.id === id);
+
+}
+
 
 function goWishlist(){
 
@@ -655,6 +677,8 @@ localStorage.setItem(`cart_${currentUser.id}`,JSON.stringify(cart));
 
 updateCounts();
 
+display(currentProducts);
+
 alert("Product Added To Cart");
 
 }
@@ -691,14 +715,11 @@ const product=allproducts.find(p=>p.id===id);
 wishlist.push(product);
 
 localStorage.setItem(`wishlist_${currentUser.id}`,JSON.stringify(wishlist));
+display(currentProducts);
 
 alert("Added To Wishlist");
 
-displayProducts();    
-
 }
-
-
 
 categories();
 updateCounts();
