@@ -19,10 +19,12 @@ body{
 }
 
 .navbar-brand{
-    font-size:2rem;
-    font-weight:bold;
-    letter-spacing:5px;
-    color:white!important;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: white !important;
+    font-family: Georgia, serif;
+    text-transform: uppercase;
 }
 
 .title{
@@ -78,7 +80,35 @@ body{
 .navbar-brand{
     font-size:1.6rem;
 }
+@media (max-width:768px){
 
+.card .row{
+    display:block;
+}
+
+.card .col-md-4,
+.card .col-md-8{
+    width:100%;
+    max-width:100%;
+}
+
+.card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:12px 12px 0 0;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.qty-btn{
+    width:45px;
+    height:45px;
+}
+
+}
 }
 </style>
 

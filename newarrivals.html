@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>New Arrivals</title>
+<title>New Arrivals | VISH</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,33 +21,66 @@ body{
 }
 
 .navbar-brand{
-    color:white!important;
-    font-size:2rem;
-    font-weight:bold;
-    letter-spacing:5px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: white !important;
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+}
+.dropdown-menu{
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 0;
+    box-shadow: 0 12px 30px rgba(0,0,0,.15);
+    overflow: hidden;
+}
+.dropdown-item{
+    background: white;
+    color: #444;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 22px;
+    transition: all .3s ease;
+}
+.dropdown-item:hover{
+    background: burlywood !important;
+    color: white !important;
+    padding-left: 30px;
+}
+.dropdown-divider{
+    margin: 6px 0;
 }
 
 .title{
     text-align:center;
-    margin:40px;
-    font-size:45px;
-    color:#c58a28;
+    margin:45px 0;
+    color:#b8860b;
+    font-size:42px;
     font-weight:bold;
 }
 
-.card{
-    transition:.3s;
+.product-card{
+    border:none;
+    transition:.35s;
+    cursor:pointer;
 }
 
-.card:hover{
+.product-card:hover{
     transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
 }
 
-.card img{
+.product-card img{
     width:100%;
     aspect-ratio:3/4;
     object-fit:cover;
-    object-position:center;
+    transition:.4s;
+}
+
+.product-card:hover img{
+    transform:scale(1.04);
 }
 
 .price{
@@ -59,35 +93,31 @@ body{
     position:absolute;
     top:15px;
     right:15px;
-    background:red;
-    color:white;
-    padding:8px 12px;
+    background:#dc3545;
+    color:#fff;
+    padding:6px 12px;
     border-radius:20px;
+    font-size:13px;
 }
-@media (max-width:768px){
+
+.btn-dark,
+.btn-outline-danger{
+    transition:.3s;
+}
+
+.btn-dark:hover,
+.btn-outline-danger:hover{
+    transform:translateY(-2px);
+}
+
+@media(max-width:768px){
 
 .title{
     font-size:32px;
 }
 
-.hero h1{
-    font-size:40px;
-}
-
-.product-img{
-    height:400px;
-}
-
-.card img{
-    height:300px;
-}
-
-.profile-card{
-    padding:20px;
-}
-
-.stats{
-    flex-direction:column;
+.product-card img{
+    height:320px;
 }
 
 .navbar-brand{
@@ -95,6 +125,7 @@ body{
 }
 
 }
+
 </style>
 
 </head>
@@ -105,7 +136,7 @@ body{
 
 <div class="container">
 
-<a class="navbar-brand text-white fw-bold" href="index.html">
+<a class="navbar-brand" href="index.html">
 VISH
 </a>
 
@@ -123,104 +154,82 @@ data-bs-target="#navbarNav">
 
 <ul class="navbar-nav mx-auto" style="font-size:1.12rem;">
 
-<li class="nav-item dropdown">
+<ul class="navbar-nav mx-auto" style="font-size:1.12rem;">
 
-<a
-class="nav-link dropdown-toggle text-white px-4"
-href="#"
-id="categoryDropdown"
-role="button"
-data-bs-toggle="dropdown">
+    <li class="nav-item dropdown">
 
-Categories
+        <a
+        class="nav-link dropdown-toggle text-white px-4"
+        href="#"
+        id="categoryDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
 
-</a>
+        Categories
 
-<ul class="dropdown-menu">
+        </a>
 
-<li><a class="dropdown-item" href="products.html?category=Dresses">Dresses</a></li>
+        <ul class="dropdown-menu">
 
-<li><a class="dropdown-item" href="products.html?category=Tops">Tops</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Dresses">Dresses</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Tops">Tops</a></li>
+            <li><a class="dropdown-item" href="products.html?category=T-Shirts">T-Shirts</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Shirts">Shirts</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Jeans">Jeans</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Skirts">Skirts</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Sarees">Sarees</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Lehengas">Lehengas</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Kurtas">Kurtas</a></li>
+            <li><a class="dropdown-item" href="products.html?category=Gowns">Gowns</a></li>
 
-<li><a class="dropdown-item" href="products.html?category=T-Shirts">T-Shirts</a></li>
+        </ul>
 
-<li><a class="dropdown-item" href="products.html?category=Shirts">Shirts</a></li>
+    </li>
 
-<li><a class="dropdown-item" href="products.html?category=Jeans">Jeans</a></li>
+    <li class="nav-item">
+        <a class="nav-link text-white px-4" href="index.html#collections">
+            Collections
+        </a>
+    </li>
 
-<li><a class="dropdown-item" href="products.html?category=Skirts">Skirts</a></li>
+    <li class="nav-item">
+        <a class="nav-link text-white px-4 active" href="newarrivals.html">
+            New Arrivals
+        </a>
+    </li>
 
-<li><a class="dropdown-item" href="products.html?category=Sarees">Sarees</a></li>
-
-<li><a class="dropdown-item" href="products.html?category=Lehengas">Lehengas</a></li>
-
-<li><a class="dropdown-item" href="products.html?category=Kurtas">Kurtas</a></li>
-
-<li><a class="dropdown-item" href="products.html?category=Gowns">Gowns</a></li>
+    <li class="nav-item">
+        <a class="nav-link text-white px-4" href="wishlist.html">
+            Wishlist
+        </a>
+    </li>
 
 </ul>
 
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link text-white px-4" href="index.html#collections">
-Collections
-</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link text-white px-4" href="newarrivals.html">
-New Arrivals
-</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link text-white px-4" href="wishlist.html">
-Wishlist
-</a>
-
-</li>
 
 </ul>
 
 <div class="d-flex align-items-center gap-3">
 
 <button
-class="btn btn-outline-none text-white position-relative"
-onclick="goWishlist()">
-
-Wishlist
-
-<span
-id="wishlistCount"
-class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-
-0
-
-</span>
-
+class="btn text-white"
+onclick="goCart()">
+Cart
 </button>
+
+<div id="userSection">
 
 <button
-class="btn btn-outline-none text-white position-relative"
-onclick="goCart()">
+id="accountBtn"
+class="btn border-white text-white rounded-pill px-4"
+onclick="accountAction()">
 
-Cart
-
-<span
-id="cartCount"
-class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-
-0
-
-</span>
+Login
 
 </button>
+
+</div>
 
 </div>
 
@@ -229,7 +238,6 @@ class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-
 </div>
 
 </nav>
-
 
 <h1 class="title">
 
@@ -252,63 +260,108 @@ class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-
 const latestProducts = allproducts.slice(-6).reverse();
 
 displayProducts();
+updateNavbar();
 updateCounts();
 
-function displayProducts() {
+function displayProducts(){
 
     let data = "";
 
-    latestProducts.forEach(product => {
+    latestProducts.forEach(product=>{
 
         data += `
 
-        <div class="col-md-4 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card shadow h-100 position-relative">
+            <div
+            class="card product-card shadow h-100 position-relative"
+            onclick="openProduct(${product.id})">
 
                 <div class="badge-new">
+
                     NEW
+
                 </div>
 
                 <img
-                    src="${product.image}"
-                    class="card-img-top"
-                    style="cursor:pointer;"
-                    onclick="openProduct(${product.id})">
+                src="${product.image}"
+                class="card-img-top">
 
                 <div class="card-body d-flex flex-column">
 
-                    <h5>${product.name}</h5>
+                    <h5 class="fw-bold">
+
+                        ${product.name}
+
+                    </h5>
 
                     <p class="text-muted">
+
                         ${product.category}
+
                     </p>
 
-                    <div class="price">
+                    <div class="price mb-2">
+
                         ₹${product.price}
+
                     </div>
 
                     <p>
+
                         ${product.description}
+
                     </p>
 
-                    <div class="mt-auto">
+                    <div class="mt-auto d-grid gap-2">
 
-                        <button
-                            class="btn btn-dark w-100 mb-2"
-                            onclick="addToCart(${product.id})">
+                        ${
+                        isInCart(product.id)
 
-                            Add To Cart
+                        ?
 
-                        </button>
+                        `<button
+                        class="btn btn-success"
+                        disabled>
 
-                        <button
-                            class="btn btn-outline-danger w-100"
-                            onclick="addWishlist(${product.id})">
+                        ✔ Added To Cart
 
-                            ❤ Add To Wishlist
+                        </button>`
 
-                        </button>
+                        :
+
+                        `<button
+                        class="btn btn-dark"
+                        onclick="event.stopPropagation();addToCart(${product.id})">
+
+                        Add To Cart
+
+                        </button>`
+                        }
+
+                        ${
+                        isInWishlist(product.id)
+
+                        ?
+
+                        `<button
+                        class="btn btn-success"
+                        disabled>
+
+                        ❤ Added To Wishlist
+
+                        </button>`
+
+                        :
+
+                        `<button
+                        class="btn btn-outline-danger"
+                        onclick="event.stopPropagation();addWishlist(${product.id})">
+
+                        ❤ Add To Wishlist
+
+                        </button>`
+                        }
 
                     </div>
 
@@ -326,19 +379,35 @@ function displayProducts() {
 
 }
 
-// --------------------------
-// Open Product Details
-// --------------------------
-
 function openProduct(id){
 
-    window.location.href = `product.html?id=${id}`;
+    window.location.href=`productDetails.html?id=${id}`;
 
 }
 
-// --------------------------
-// Add To Cart
-// --------------------------
+function isInCart(id){
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!currentUser) return false;
+
+    let cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+
+    return cart.some(item=>item.id===id);
+
+}
+
+function isInWishlist(id){
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!currentUser) return false;
+
+    let wishlist = JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+
+    return wishlist.some(item=>item.id===id);
+
+}
 
 function addToCart(id){
 
@@ -348,7 +417,7 @@ function addToCart(id){
 
         alert("Please Login First");
 
-        window.location.href = "login.html";
+        window.location.href="login.html";
 
         return;
 
@@ -356,20 +425,24 @@ function addToCart(id){
 
     let cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
 
-    const product = allproducts.find(p => p.id === id);
+    const existing = cart.find(item=>item.id===id);
 
-    const existing = cart.find(item => item.id === id);
+    const product = allproducts.find(p=>p.id===id);
 
     if(existing){
 
         existing.quantity++;
 
     }
+
     else{
 
         cart.push({
+
             ...product,
+
             quantity:1
+
         });
 
     }
@@ -378,13 +451,9 @@ function addToCart(id){
 
     updateCounts();
 
-    alert("Product Added To Cart");
+    displayProducts();
 
 }
-
-// --------------------------
-// Add Wishlist
-// --------------------------
 
 function addWishlist(id){
 
@@ -394,7 +463,7 @@ function addWishlist(id){
 
         alert("Please Login First");
 
-        window.location.href = "login.html";
+        window.location.href="login.html";
 
         return;
 
@@ -402,17 +471,13 @@ function addWishlist(id){
 
     let wishlist = JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
 
-    const exists = wishlist.find(item => item.id === id);
-
-    if(exists){
-
-        alert("Already in Wishlist");
+    if(wishlist.some(item=>item.id===id)){
 
         return;
 
     }
 
-    const product = allproducts.find(p => p.id === id);
+    const product = allproducts.find(p=>p.id===id);
 
     wishlist.push(product);
 
@@ -420,48 +485,29 @@ function addWishlist(id){
 
     updateCounts();
 
-    alert("Added To Wishlist");
+    displayProducts();
 
 }
-
-// --------------------------
-// Update Cart & Wishlist Count
-// --------------------------
 
 function updateCounts(){
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if(!currentUser){
-
-        document.getElementById("cartCount").innerHTML = 0;
-        document.getElementById("wishlistCount").innerHTML = 0;
-
-        return;
-
-    }
+    if(!currentUser) return;
 
     const cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
 
     const wishlist = JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
 
-    let totalCartItems = 0;
+    let total = 0;
 
     cart.forEach(item=>{
 
-        totalCartItems += item.quantity;
+        total += item.quantity;
 
     });
 
-    document.getElementById("cartCount").innerHTML = totalCartItems;
-
-    document.getElementById("wishlistCount").innerHTML = wishlist.length;
-
 }
-
-// --------------------------
-// Cart Navigation
-// --------------------------
 
 function goCart(){
 
@@ -481,28 +527,38 @@ function goCart(){
 
 }
 
-// --------------------------
-// Wishlist Navigation
-// --------------------------
-
-function goWishlist(){
+function updateNavbar(){
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if(!currentUser){
+    if(currentUser){
 
-        alert("Please Login First");
-
-        window.location.href="login.html";
-
-        return;
+        document.getElementById("accountBtn").innerHTML = currentUser.name;
 
     }
 
-    window.location.href="wishlist.html";
+}
+
+function accountAction(){
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(currentUser){
+
+        window.location.href="profile.html";
+
+    }
+
+    else{
+
+        window.location.href="login.html";
+
+    }
 
 }
+
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

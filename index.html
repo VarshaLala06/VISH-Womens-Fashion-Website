@@ -9,6 +9,7 @@
 body{
     background-color:burlywood;
 }
+
 html{
     scroll-behavior: smooth;
 }
@@ -107,7 +108,10 @@ html{
 .hero{
     position:relative;
 }
-
+.price{
+    color:#c58a28;
+    font-weight:bold;
+}
 .hero-img{
     width:100%;
     height:730px;
@@ -148,6 +152,37 @@ html{
     box-shadow:0 18px 40px rgba(0,0,0,.2);
 
 }
+.btn-dark{
+    transition:0.3s ease;
+}
+.btn-dark:hover{
+    background:black;
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+.shop-btn{
+    display:inline-block;
+    padding:12px 34px;
+    border:1px solid white;
+    color:white;
+    text-decoration:none;
+    background:transparent;
+    font-size:15px;
+    font-weight:500;
+    letter-spacing:1px;
+    transition:.3s;
+}
+
+.shop-btn:hover{
+    background:white;
+    color:#222;
+}
+.card-body h4{
+    color:#c58a28;
+    font-weight:bolder;
+}
+
 @media (max-width:768px){
 
 .title{
@@ -177,6 +212,8 @@ html{
 .navbar-brand{
     font-size:1.6rem;
 }
+
+
 
 }
     </style>
@@ -246,10 +283,9 @@ html{
                 <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
                 </div> -->
-                <button class="btn btn-outline-none text-white" style="font-size: 1.12rem;" onclick="window.location.href='cart.html'" >
-                    Cart
-                </button>
-
+               <button class="btn btn-outline-none text-white" style="font-size: 1.12rem;" onclick="window.location.href='cart.html'" >
+                 Cart
+                 </button>
                 <div id="userSection">
                    <button id="accountBtn" class="btn border-white text-white rounded-pill px-4" onclick="accountAction()">
                         Login
@@ -283,7 +319,7 @@ html{
         </p>
 
         <button
-        class="btn btn-light btn-lg mt-3"
+        class="btn btn-light btn-lg mt-3 shop-btn"
         onclick="document.getElementById('collections').scrollIntoView()">
 
         Shop Now
@@ -298,7 +334,7 @@ html{
 
 <section class="container py-5">
 
-<h2 class="text-center mb-5 fw-bold">
+<h2 class="text-center mb-5 fw-bold text-white">
 New Arrivals
 </h2>
 
@@ -334,7 +370,7 @@ Explore our handpicked collections crafted for every occasion.
 
 <section class="container py-5">
 
-<h2 class="text-center fw-bold mb-5">
+<h2 class="text-center fw-bold mb-5 text-white">
 Shop By Category
 </h2>
 
@@ -352,7 +388,7 @@ style="
 
 <div class="card-body">
 
-<h4>T-Shirts</h4>
+<h4 >T-Shirts</h4>
 
 <a
 href="products.html?category=T-Shirts"
@@ -665,13 +701,15 @@ function loadNewArrivals(){
 
                     <p class="text-muted">${product.category}</p>
 
-                    <h5 class="text-warning">₹${product.price}</h5>
+                    <h5 class="price mb-3">
+                        ₹${product.price}
+                    </h5>
 
                     <button
-                        class="btn btn-dark mt-auto"
+                        class="btn btn-dark mt-auto "
                         onclick="event.stopPropagation(); window.location.href='productDetails.html?id=${product.id}'">
 
-                        View Details
+                        Explore
 
                     </button>
 

@@ -19,10 +19,12 @@ body{
 }
 
 .navbar-brand{
-    font-size:2rem;
-    font-weight:bold;
-    color:white!important;
-    letter-spacing:5px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: white !important;
+    font-family: Georgia, serif;
+    text-transform: uppercase;
 }
 
 .title{
@@ -110,7 +112,47 @@ body{
     transition:.3s;
 }
 
+.filter-box{
+    background:burlywood;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    position:sticky;
+    top:100px;
+    margin-bottom: 10px;
+}
 
+.filter-title{
+    color:white;
+    font-weight:600;
+    margin-bottom:15px;
+    letter-spacing:1px;
+}
+
+.filter-box .form-control,
+.filter-box .form-select{
+    border:none;
+    border-radius:10px;
+    padding:12px;
+    box-shadow:none;
+}
+
+.filter-box .form-control:focus,
+.filter-box .form-select:focus{
+    border:2px solid white;
+    box-shadow:0 0 8px rgba(255,255,255,.4);
+}
+
+.filter-box::before{
+    content:"FILTERS";
+    display:block;
+    color:white;
+    font-size:14px;
+    letter-spacing:3px;
+    margin-bottom:18px;
+    opacity:.8;
+    font-weight: 500;
+}
 
 .card-body{
     padding:22px;
@@ -290,33 +332,31 @@ Cart
 
 <div class="filter-box">
 
-<h4>Search</h4>
+    <h4 class="filter-title">
+        Search
+    </h4>
 
-<input
-type="text"
-id="search"
-class="form-control mb-4"
-placeholder="Search Products..."
-onkeyup="searchProducts()">
+    <input
+    type="text"
+    id="search"
+    class="form-control mb-4"
+    placeholder="Search Products..."
+    onkeyup="searchProducts()">
 
-<h4>Sort</h4>
+    <h4 class="filter-title">
+        Sort
+    </h4>
 
-<select
-class="form-select"
-id="sort"
-onchange="sortProducts()">
+    <select
+    class="form-select"
+    id="sort"
+    onchange="sortProducts()">
 
-<option value="">Default</option>
+        <option value="">Default</option>
+        <option value="low">Price : Low to High</option>
+        <option value="high">Price : High to Low</option>
 
-<option value="low">
-Price : Low to High
-</option>
-
-<option value="high">
-Price : High to Low
-</option>
-
-</select>
+    </select>
 
 </div>
 
@@ -455,6 +495,7 @@ ${product.description}
 
 <div class="mt-auto d-grid gap-2">
 
+
 ${
 isInCart(product.id)
 
@@ -464,7 +505,7 @@ isInCart(product.id)
 class="btn btn-success w-100"
 disabled>
 
-✔ Added To Cart
+ Added To Cart
 
 </button>`
 
@@ -472,7 +513,7 @@ disabled>
 
 `<button
 class="btn btn-dark w-100"
-onclick="event.stopPropagation();addToCart(${product.id})">
+onclick="event.stopPropagation(); addToCart(${product.id}); return false;">
 
 Add To Cart
 
@@ -496,12 +537,13 @@ disabled>
 
 `<button
 class="btn btn-outline-danger w-100"
-onclick="event.stopPropagation();addWishlist(${product.id})">
+onclick="event.stopPropagation(); addWishlist(${product.id}); return false;">
 
 ❤ Add To Wishlist
 
 </button>`
 }
+
 
 </div>
 
@@ -564,20 +606,37 @@ display(arr);
 
 function updateCounts(){
 
-const currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-if(!currentUser) return;
+    const cartCount = document.getElementById("cartCount");
+    const wishlistCount =
+    
+    document.getElementById("wishlistCount");
 
-const cart=JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+    if(!cartCount || !wishlistCount){
+        return;
+    }
 
-const wishlist=JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+    if(!currentUser){
 
-document.getElementById("cartCount").innerHTML=cart.length;
+        cartCount.innerHTML = 0;
+        wishlistCount.innerHTML = 0;
+        return;
 
-document.getElementById("wishlistCount").innerHTML=wishlist.length;
+    }
 
+    const cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+    const wishlist = JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += item.quantity;
+    });
+
+    cartCount.innerHTML = total;
+    wishlistCount.innerHTML = wishlist.length;
 }
-
 function goCart(){
 
 const currentUser=JSON.parse(localStorage.getItem("currentUser"));
@@ -610,13 +669,13 @@ return wishlist.some(item => item.id === id);
 
 function isInCart(id){
 
-const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-if(!currentUser) return false;
+    if(!currentUser) return false;
 
-let cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+    const cart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
 
-return cart.some(item => item.id === id);
+    return cart.some(item => Number(item.id) === Number(id));
 
 }
 
@@ -645,7 +704,7 @@ const currentUser=JSON.parse(localStorage.getItem("currentUser"));
 
 if(!currentUser){
 
-alert("Please Login First");
+alert("Please Login");
 
 window.location.href="login.html";
 
@@ -657,7 +716,7 @@ const product=allproducts.find(p=>p.id===id);
 
 let cart=JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
 
-const existing=cart.find(item=>item.id===id);
+const existing = cart.find(item=>item.id===id);
 
 if(existing){
 
@@ -679,7 +738,7 @@ updateCounts();
 
 display(currentProducts);
 
-alert("Product Added To Cart");
+
 
 }
 
@@ -690,7 +749,7 @@ const currentUser=JSON.parse(localStorage.getItem("currentUser"));
 
 if(!currentUser){
 
-alert("Please Login First");
+alert("Please Login");
 
 window.location.href="login.html";
 
@@ -704,7 +763,6 @@ const exists=wishlist.find(item=>item.id===id);
 
 if(exists){
 
-alert("Already in Wishlist");
 
 return;
 
@@ -717,7 +775,6 @@ wishlist.push(product);
 localStorage.setItem(`wishlist_${currentUser.id}`,JSON.stringify(wishlist));
 display(currentProducts);
 
-alert("Added To Wishlist");
 
 }
 

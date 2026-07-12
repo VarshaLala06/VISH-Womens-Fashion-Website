@@ -218,21 +218,49 @@ ${product.collection}
 
 <div class="d-grid gap-3 mt-4">
 
-<button
+${
+isInCart(product.id)
+
+?
+
+`<button class="btn btn-success" disabled>
+
+✔ Added To Cart
+
+</button>`
+
+:
+
+`<button
 class="btn btn-dark"
 onclick="addToCart(${product.id})">
 
 Add To Cart
 
-</button>
+</button>`
+}
 
-<button
+${
+isInWishlist(product.id)
+
+?
+
+`<button class="btn btn-success" disabled>
+
+❤ Added To Wishlist
+
+</button>`
+
+:
+
+`<button
 class="btn btn-outline-danger"
 onclick="addWishlist(${product.id})">
 
-❤ Wishlist
+❤ Add To Wishlist
 
-</button>
+</button>`
+}
 
 </div>
 
@@ -244,7 +272,29 @@ onclick="addWishlist(${product.id})">
 
 document.getElementById("product").innerHTML=html;
 
+function isInCart(id){
 
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!user) return false;
+
+    const cart = JSON.parse(localStorage.getItem(`cart_${user.id}`)) || [];
+
+    return cart.some(item => Number(item.id) === Number(id));
+
+}
+
+function isInWishlist(id){
+
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!user) return false;
+
+    const wishlist = JSON.parse(localStorage.getItem(`wishlist_${user.id}`)) || [];
+
+    return wishlist.some(item => Number(item.id) === Number(id));
+
+}
 
 function addToCart(id){
 
@@ -277,7 +327,7 @@ function addToCart(id){
 
     localStorage.setItem(`cart_${user.id}`, JSON.stringify(cart));
 
-    alert("Added To Cart");
+location.reload();
 
 }
 
@@ -309,7 +359,7 @@ function addWishlist(id){
 
     localStorage.setItem(`wishlist_${user.id}`, JSON.stringify(wishlist));
 
-    alert("Added To Wishlist");
+location.reload();
 
 }
 

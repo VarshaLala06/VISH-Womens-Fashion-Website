@@ -1,7 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,6 +13,7 @@
 
 body{
     background:#f8f4ef;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .navbar{
@@ -20,64 +21,187 @@ body{
 }
 
 .navbar-brand{
-    font-size:2rem;
-    font-weight:bold;
-    letter-spacing:5px;
-    color:white!important;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: white !important;
+    font-family: Georgia, serif;
+    text-transform: uppercase;
 }
 
 .profile-card{
     max-width:650px;
     margin:60px auto;
     background:white;
-    border-radius:20px;
-    padding:40px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    border-radius:22px;
+    padding:45px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
 
 .avatar{
+
     width:120px;
     height:120px;
+    margin:auto;
+
     border-radius:50%;
+
     background:burlywood;
     color:white;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:45px;
+
+    font-size:48px;
     font-weight:bold;
-    margin:auto;
+
+}
+
+.profile-card h2{
+
+    margin-top:20px;
+    font-weight:700;
+    color:#444;
+
+}
+
+.profile-card p{
+
+    color:#777;
+
 }
 
 .stats{
+
     display:flex;
-    justify-content:space-between;
     gap:20px;
-    margin:35px 0;
+    margin:40px 0;
+
 }
 
 .stat-box{
+
     flex:1;
-    background:#f8f4ef;
-    border-radius:15px;
-    padding:20px;
+    background:white;
+    border:1px solid #ead8c0;
+    border-radius:18px;
+    padding:22px;
     text-align:center;
+    transition:.3s;
+
+}
+
+.stat-box:hover{
+
+    transform:translateY(-6px);
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
 }
 
 .stat-box h2{
-    color:#b8860b;
-    font-weight:bold;
+
+    color:burlywood;
+    font-size:34px;
+    margin-bottom:8px;
+
+}
+
+.stat-box p{
+
+    margin:0;
+    color:#777;
+
+}
+
+.info{
+
+    background:#faf6f0;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:30px;
+
 }
 
 .info p{
-    font-size:18px;
-    margin-bottom:10px;
+
+    margin:0;
+    color:#555;
+    font-size:17px;
+
 }
 
-.btn{
-    border-radius:10px;
+.btn-main{
+
+    background:burlywood;
+    color:white;
+    border:none;
+    border-radius:12px;
     padding:12px;
-    font-size:18px;
+    font-size:17px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-main:hover{
+
+    background:#c79b5d;
+    color:white;
+    transform:translateY(-2px);
+
+}
+
+.btn-outline-main{
+
+    background:white;
+    color:burlywood;
+    border:2px solid burlywood;
+    border-radius:12px;
+    padding:12px;
+    font-size:17px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-outline-main:hover{
+
+    background:burlywood;
+    color:white;
+    transform:translateY(-2px);
+
+}
+
+@media(max-width:768px){
+
+.profile-card{
+
+    margin:25px;
+    padding:30px;
+
+}
+
+.stats{
+
+    flex-direction:column;
+
+}
+
+.avatar{
+
+    width:100px;
+    height:100px;
+    font-size:40px;
+
+}
+
+.navbar-brand{
+
+    font-size:1.6rem;
+
+}
+
 }
 
 </style>
@@ -96,8 +220,6 @@ VISH
 
 </a>
 
-
-
 </div>
 
 </nav>
@@ -110,11 +232,11 @@ V
 
 </div>
 
-<div class="text-center mt-4">
+<div class="text-center">
 
 <h2 id="username"></h2>
 
-<p class="text-muted" id="email"></p>
+<p id="email"></p>
 
 </div>
 
@@ -142,20 +264,18 @@ V
 
 <p>
 
-<strong>User ID :</strong>
+<strong>Email :</strong>
 
-<span id="userid"></span>
+<span id="emailInfo"></span>
 
 </p>
 
 </div>
 
-<hr class="my-4">
-
 <div class="d-grid gap-3">
 
 <button
-class="btn btn-primary"
+class="btn btn-main"
 onclick="window.location.href='orders.html'">
 
 📦 My Orders
@@ -163,7 +283,7 @@ onclick="window.location.href='orders.html'">
 </button>
 
 <button
-class="btn btn-danger"
+class="btn btn-outline-main"
 onclick="logout()">
 
 Logout
@@ -180,45 +300,70 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 if(!currentUser){
 
-alert("Please Login");
+    alert("Please Login First");
 
-window.location.href="login.html";
+    window.location.href="login.html";
 
 }
 
-document.getElementById("username").innerHTML=currentUser.name;
+// -------------------
+// User Details
+// -------------------
 
-document.getElementById("email").innerHTML=currentUser.email;
+document.getElementById("username").innerHTML = currentUser.name;
 
-document.getElementById("userid").innerHTML=currentUser.id;
+document.getElementById("email").innerHTML = currentUser.email;
 
-document.getElementById("avatar").innerHTML=currentUser.name.charAt(0).toUpperCase();
+document.getElementById("emailInfo").innerHTML = currentUser.email;
 
-const cart=JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+document.getElementById("avatar").innerHTML =
+currentUser.name.charAt(0).toUpperCase();
 
-const wishlist=JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+// -------------------
+// Cart Count
+// -------------------
 
-let totalItems=0;
+let cart =
+JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+
+let totalCart = 0;
 
 cart.forEach(item=>{
 
-totalItems+=item.quantity;
+    totalCart += item.quantity;
 
 });
 
-document.getElementById("cartItems").innerHTML=totalItems;
+document.getElementById("cartItems").innerHTML = totalCart;
 
-document.getElementById("wishlistItems").innerHTML=wishlist.length;
+// -------------------
+// Wishlist Count
+// -------------------
+
+let wishlist =
+JSON.parse(localStorage.getItem(`wishlist_${currentUser.id}`)) || [];
+
+document.getElementById("wishlistItems").innerHTML = wishlist.length;
+
+// -------------------
+// Logout
+// -------------------
 
 function logout(){
 
-if(confirm("Are you sure you want to logout?")){
+    const confirmLogout = confirm("Logout from your account?");
 
-localStorage.removeItem("currentUser");
+    if(!confirmLogout){
 
-window.location.href="login.html";
+        return;
 
-}
+    }
+
+    localStorage.removeItem("currentUser");
+
+    alert("Logged Out Successfully");
+
+    window.location.href="login.html";
 
 }
 
