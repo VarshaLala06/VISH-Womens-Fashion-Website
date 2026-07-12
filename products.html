@@ -211,112 +211,98 @@ body{
 
 <nav class="navbar navbar-expand-lg py-3">
 
-<div class="container">
+    <div class="container">
 
-<a class="navbar-brand text-white fw-bold" href="index.html">
-VISH
-</a>
+        <a class="navbar-brand text-white fw-bold" href="index.html">
+            VISH
+        </a>
 
-<button
-class="navbar-toggler bg-light"
-type="button"
-data-bs-toggle="collapse"
-data-bs-target="#navbarNav">
+        <button
+            class="navbar-toggler bg-light"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
 
-<span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
 
-</button>
+        </button>
 
-<div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
 
-<ul class="navbar-nav mx-auto" style="font-size:1.12rem;">
+            <!-- Center Menu -->
+            <ul class="navbar-nav mx-auto" style="font-size:1.12rem;">
 
-<li class="nav-item dropdown">
+                <li class="nav-item dropdown">
 
-<a
-class="nav-link dropdown-toggle text-white px-4"
-href="#"
-id="categoryDropdown"
-role="button"
-data-bs-toggle="dropdown">
+                    <a
+                        class="nav-link dropdown-toggle text-white px-4"
+                        href="#"
+                        id="categoryDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown">
 
-Categories
+                        Categories
 
-</a>
+                    </a>
 
-<ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
 
-<li><a class="dropdown-item" href="products.html?category=Dresses">Dresses</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Dresses">Dresses</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Tops">Tops</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=T-Shirts">T-Shirts</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Shirts">Shirts</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Jeans">Jeans</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Skirts">Skirts</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Sarees">Sarees</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Lehengas">Lehengas</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Kurtas">Kurtas</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=Gowns">Gowns</a></li>
 
-<li><a class="dropdown-item" href="products.html?category=Tops">Tops</a></li>
+                    </ul>
 
-<li><a class="dropdown-item" href="products.html?category=T-Shirts">T-Shirts</a></li>
+                </li>
 
-<li><a class="dropdown-item" href="products.html?category=Shirts">Shirts</a></li>
+                <li class="nav-item">
+                    <a class="nav-link text-white px-4" href="index.html#collections">
+                        Collections
+                    </a>
+                </li>
 
-<li><a class="dropdown-item" href="products.html?category=Jeans">Jeans</a></li>
+                <li class="nav-item">
+                    <a class="nav-link text-white px-4" href="newarrivals.html">
+                        New Arrivals
+                    </a>
+                </li>
 
-<li><a class="dropdown-item" href="products.html?category=Skirts">Skirts</a></li>
+                <li class="nav-item">
+                    <a class="nav-link text-white px-4" href="wishlist.html">
+                        Wishlist
+                    </a>
+                </li>
 
-<li><a class="dropdown-item" href="products.html?category=Sarees">Sarees</a></li>
+            </ul>
 
-<li><a class="dropdown-item" href="products.html?category=Lehengas">Lehengas</a></li>
+            <!-- Right Side -->
+            <div class="d-flex align-items-center gap-3">
 
-<li><a class="dropdown-item" href="products.html?category=Kurtas">Kurtas</a></li>
+                <button
+                    class="btn text-white"
+                    onclick="goCart()">
+                    Cart
+                </button>
 
-<li><a class="dropdown-item" href="products.html?category=Gowns">Gowns</a></li>
+                <button
+                    id="accountBtn"
+                    class="btn border-white text-white rounded-pill px-4"
+                    onclick="accountAction()">
+                    Login
+                </button>
 
-</ul>
+            </div>
 
-</li>
+        </div>
 
-<li class="nav-item">
-
-<a class="nav-link text-white px-4" href="index.html#collections">
-Collections
-</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link text-white px-4" href="newarrivals.html">
-New Arrivals
-</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link text-white px-4" href="wishlist.html">
-Wishlist
-</a>
-
-</li>
-
-</ul>
-
-<div class="d-flex align-items-center gap-3">
-
-
-<button
-class="btn text-white"
-onclick="goWishlist()">
-Wishlist
-</button>
-
-<button
-class="btn text-white"
-onclick="goCart()">
-Cart
-</button>
-
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </nav>
 
@@ -775,6 +761,24 @@ wishlist.push(product);
 localStorage.setItem(`wishlist_${currentUser.id}`,JSON.stringify(wishlist));
 display(currentProducts);
 
+
+}
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(currentUser){
+    document.getElementById("accountBtn").innerHTML = "Profile";
+}
+
+function accountAction(){
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(currentUser){
+        window.location.href = "profile.html";
+    }
+    else{
+        window.location.href = "login.html";
+    }
 
 }
 

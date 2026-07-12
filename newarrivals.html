@@ -532,10 +532,8 @@ function updateNavbar(){
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     if(currentUser){
-
-        document.getElementById("accountBtn").innerHTML = currentUser.name;
-
-    }
+         document.getElementById("accountBtn").innerHTML = "Profile";
+}
 
 }
 
